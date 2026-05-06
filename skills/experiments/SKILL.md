@@ -1,6 +1,6 @@
 ---
 name: "experiments"
-description: "系统设计、执行和管理实验，包括实验设计、数据采集、质量控制、结果分析。当进行实验研究、A/B测试或验证假设时使用。"
+description: "Systematic experiment design, execution, and management — covering experimental design, data acquisition, quality control, and results analysis. Use when running experimental research, A/B tests, or validating hypotheses."
 ---
 
 # Experiments Designing & Running Skill

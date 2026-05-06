@@ -1,0 +1,10 @@
+# RIA red-status JSON emission directory.
+#
+# Per RIA architecture v2 §5.6 schema v1.1, every commit to RIA `main`
+# emits `<sha>.json` here describing tests blocked by platform gaps.
+#
+# Emitter: ria/observability/red_status.py (sub-wave 3 deliverable).
+# Mapping: tests/_blocked_by_platform.yaml.
+#
+# This file exists to ensure the directory survives `git add` until the
+# first JSON is emitted in sub-wave 3.

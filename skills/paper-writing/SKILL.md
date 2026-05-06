@@ -1,6 +1,6 @@
 ---
 name: "paper-writing"
-description: "系统撰写学术论文，包括结构组织、学术写作、图表制作、引用管理。当撰写期刊论文、会议论文或学位论文时使用。"
+description: "Systematic academic paper writing covering structural organization, scholarly prose, figure/table production, and citation management. Use when writing a journal paper, conference paper, or thesis."
 ---
 
 # Paper Writing Skill

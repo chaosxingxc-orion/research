@@ -1,6 +1,6 @@
 ---
 name: "paper-reading"
-description: "高效阅读学术论文、提取关键信息、生成标准化笔记。当需要快速了解论文内容、系统整理文献或构建知识体系时使用。"
+description: "Efficient academic paper reading, key-information extraction, and standardized note generation. Use to rapidly comprehend paper content, organize literature systematically, or build a knowledge base."
 ---
 
 # Paper Reading Skill

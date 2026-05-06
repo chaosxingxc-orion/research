@@ -1,6 +1,6 @@
 ---
 name: "literature-review"
-description: "系统性文献检索、评估和综述。当开始新的研究项目、需要了解某个领域的现状或撰写文献综述时使用。"
+description: "Systematic literature search, evaluation, and synthesis. Use when starting a new research project, surveying the state of a field, or writing a literature review."
 ---
 
 # 文献综述技能

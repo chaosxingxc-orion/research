@@ -1,0 +1,86 @@
+# RIA Red-Status Mapping (v1.1)
+#
+# Maps integration / conformance test globs to platform wave-IDs that
+# would unblock them. Consumed by:
+#   - ria/observability/red_status.py (emitter; sub-wave 3)
+#   - check tooling for red-status JSON schema validation (G-RIA-12)
+#
+# Schema:
+#   - test_glob: pytest glob (string or list)
+#   - blocked_by_wave_id: hi-agent wave acceptance ID (e.g. "W36-A4-LINEAGE")
+#   - blocked_by_short: <= 100 chars human description
+#   - first_observed_ria_head: optional sha for "stale red" tracking
+#
+# Per RIA architecture v2 §5.6 schema v1.1, the field name is
+# `blocked_by_wave_id` (wave-agnostic); the legacy `blocked_by_w34_id` field
+# is retired (was renamed in v2.0.1 erratum 2026-05-05).
+
+# ---------------------------------------------------------------------------
+# RETIRED entries — closed at hi-agent W34 HEAD 77222f8b (kept as comments
+# for historical traceability)
+# ---------------------------------------------------------------------------
+# - test_glob: "tests/integration/test_evolution_engine_*"
+#   blocked_by_wave_id: "W34-F.2"   (closed; lineage population)
+# - test_glob: "tests/integration/test_*_spine_validation.py"
+#   blocked_by_wave_id: "W34-F.3"   (closed; ReasoningTrace spine)
+# - test_glob: "tests/integration/test_knowledge_*_tenant_partition.py"
+#   blocked_by_wave_id: "W34-F.4"   (closed; KnowledgeWiki tenant partition)
+# - test_glob: "tests/integration/test_manifest_*"
+#   blocked_by_wave_id: "W34-MANIFEST"   (closed; posture frozen)
+# - test_glob: "tests/integration/test_idempotency_cross_process_*"
+#   blocked_by_wave_id: "W34-IDEMPOTENCY"   (closed; cross-process replay)
+# - test_glob: "tests/integration/test_concurrency_*"
+#   blocked_by_wave_id: "W34-CONCURRENCY-*"   (closed; baselines real)
+
+# ---------------------------------------------------------------------------
+# RETIRED at hi-agent W35 HEAD bd4d38d5 / corrective-CLOSE ad521c07
+# (kept as comments)
+# ---------------------------------------------------------------------------
+# - test_glob: "tests/conformance/test_contract_dataclass_spine_validation.py"
+#   blocked_by_wave_id: "W35-T1"   (closed; 53 spine targets)
+# - test_glob: "tests/posture/test_run_manager_body_tenant_id_fallback*"
+#   blocked_by_wave_id: "W35-T3"   (closed; INVERTED + C-4 dev-side)
+# - test_glob: "tests/integration/test_idempotency_ttl_purge*"
+#   blocked_by_wave_id: "W35-T4"   (closed; TTL purge + lifespan loop)
+# - test_glob: "tests/integration/test_idempotency_metrics*"
+#   blocked_by_wave_id: "W35-T6 + C-1"   (closed; tenant_id label revert)
+
+# ---------------------------------------------------------------------------
+# ACTIVE — W36 binding items per RIA W36 entry directive +
+# W35 corrective acceptance + W36 supplement directive
+# ---------------------------------------------------------------------------
+
+- test_glob: "tests/integration/test_evolution_engine_lineage_*"
+  blocked_by_wave_id: "W36-A4-LINEAGE"
+  blocked_by_short: "RunResponse/RunStatus/RunStream/StoredEvent/ReasoningTrace need attempt-chain fields at wire/SSE level"
+
+- test_glob: "tests/integration/test_global_layer_paper_archive_*"
+  blocked_by_wave_id: "W36-A4-LINEAGE"
+  blocked_by_short: "paper_archive cross-tenant query depends on lineage schema"
+
+- test_glob:
+    - "tests/integration/test_*_retention_*"
+    - "tests/integration/test_*_disk_growth_*"
+  blocked_by_wave_id: "W36-A3-T1"
+  blocked_by_short: "8 Tier-1 stores need purge_expired pattern (only idempotency has it today)"
+
+- test_glob: "tests/integration/test_route_presence_silent_omission_*"
+  blocked_by_wave_id: "W36-A5-B13"
+  blocked_by_short: "build_app silent route omission when facade=None; consumer-side mirror = G-RIA-13"
+
+- test_glob: "tests/integration/test_*_boot_time_assertion_*"
+  blocked_by_wave_id: "W36-A5-B1-B14"
+  blocked_by_short: "14 boot-time gaps catalogued in boot-time-assertions-roadmap.md"
+
+# ---------------------------------------------------------------------------
+# ACTIVE — W36 supplement items (per
+# hi-agent-w35-corrective-acceptance-and-w36-supplement-directive-2026-05-07.md)
+# ---------------------------------------------------------------------------
+
+- test_glob: "tests/conformance/test_linux_soak_arch_7x24_*"
+  blocked_by_wave_id: "W36-S-1"
+  blocked_by_short: "6h Linux soak plan not yet published; W34-LINUX-SOAK-ROADMAP carry"
+
+- test_glob: "tests/conformance/test_postgres_persistence_equivalence_*"
+  blocked_by_wave_id: "W36-S-2"
+  blocked_by_short: "Postgres equivalence plan not yet published; HI_AGENT_TEST_POSTGRES_DSN gate"
